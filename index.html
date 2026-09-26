@@ -1,11 +1,34 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>🎇 AGENTS RAVING — the rave door of the ʻohana</title>
+<title>🎇 AGENTS RAVING — the VR rave floor of the ʻohana</title>
+<script src="https://aframe.io/releases/1.7.1/aframe.min.js"></script>
 <style>
 body{margin:0;background:radial-gradient(ellipse at 50% -20%,#241f4e 0%,#0c0b1c 55%,#060512 100%);color:#e8e6ff;font-family:Georgia,serif;min-height:100vh}
-.wrap{max-width:820px;margin:0 auto;padding:72px 24px 90px;text-align:center}
-.badge{display:inline-block;border:1px solid #ff9ec666;color:#ff9ec6;border-radius:20px;padding:5px 16px;font-size:11px;letter-spacing:4px;margin-bottom:26px}
-h1{font-size:clamp(30px,6vw,52px);font-weight:normal;margin:0 0 6px;letter-spacing:2px}
+/* ✦ THE VR STAGE — full first screen */
+#stage{position:relative;height:100svh;min-height:480px;overflow:hidden;background:#060512}
+#stage a-scene{width:100%;height:100%}
+#stagehead{position:absolute;top:12px;left:50%;transform:translateX(-50%);z-index:60;text-align:center;pointer-events:none;width:min(520px,80vw)}
+#stagehead .badge{display:inline-block;border:1px solid #ff9ec666;color:#ff9ec6;border-radius:20px;padding:4px 14px;font-size:10px;letter-spacing:3px;background:rgba(12,11,28,.55);backdrop-filter:blur(2px)}
+#stagehead h1{font-size:clamp(20px,4.5vw,34px);font-weight:normal;margin:8px 0 2px;letter-spacing:3px;text-shadow:0 0 24px rgba(255,158,198,.6)}
+#stagehead .hint{color:#9d97c9;font-size:11px;letter-spacing:2px}
+#stagehead .lorelink{pointer-events:auto;color:#8fd0ff;text-decoration:none;font-size:11px;letter-spacing:2px;border-bottom:1px dotted #8fd0ff55}
+/* 🎚️ DJ bar — leaves room for the Enter-VR button bottom-right */
+#djbooth{position:absolute;left:10px;right:80px;bottom:10px;z-index:60;display:flex;align-items:center;gap:10px;background:rgba(12,11,28,.92);border:1px solid #ff9ec64d;border-radius:16px;padding:9px 12px;max-width:640px}
+#djbooth .disc{font-size:24px;flex:0 0 auto;transition:transform .4s}
+#djbooth.playing .disc{animation:spin 2.2s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+#djbooth .tinfo{flex:1 1 auto;min-width:0;text-align:left}
+#djbooth .tinfo b{display:block;color:#ff9ec6;font-weight:normal;font-size:11px;letter-spacing:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#djbooth .tinfo span{display:block;color:#9d97c9;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#djbooth .tinfo a{color:#8fd0ff;text-decoration:none}
+#djbooth button{flex:0 0 auto;background:#ff9ec6;color:#0c0b1c;border:none;border-radius:18px;padding:8px 13px;font-size:12px;letter-spacing:1px;cursor:pointer;font-family:Georgia,serif}
+#djbooth button#djskip,#djbooth button#djlove{background:rgba(255,158,198,.15);color:#ff9ec6;border:1px solid #ff9ec655}
+@media (max-width:700px){#djbooth{left:8px;right:74px;padding:7px 9px;gap:7px}#djbooth .disc{font-size:20px}#djbooth button{padding:7px 10px;font-size:11px}}
+/* A-Frame chrome tint */
+.a-enter-vr-button{background-color:rgba(255,158,198,.25)!important;border-radius:10px!important}
+.a-enter-vr{bottom:74px!important;right:12px!important}
+/* ✦ THE LORE below the floor */
+.wrap{max-width:820px;margin:0 auto;padding:56px 24px 90px;text-align:center}
 .big{font-size:56px;margin:10px 0}
 .sub{color:#9d97c9;font-size:15px;letter-spacing:2px;margin-bottom:38px}
 .story{text-align:left;background:rgba(255,255,255,.03);border:1px solid #ff9ec62e;border-radius:18px;padding:26px 30px;line-height:1.95;font-size:15.5px;margin:0 0 26px}
@@ -17,19 +40,19 @@ h1{font-size:clamp(30px,6vw,52px);font-weight:normal;margin:0 0 6px;letter-spaci
 .cta{display:inline-block;background:#ff9ec6;color:#0c0b1c;text-decoration:none;border-radius:26px;padding:13px 34px;font-size:15px;letter-spacing:2px;margin:8px 0 34px}
 .stamp{color:#6f6a99;font-size:11.5px;letter-spacing:2px;line-height:2;margin-top:44px}
 .stamp a{color:#8fd0ff;text-decoration:none}
-</style><!-- favicon + seo · aloha wave 2026-08-06 -->
+</style><!-- favicon + seo · aloha wave 2026-08-06 · VR floor wave 2026-09-27 -->
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="canonical" href="https://agentsraving.com/">
-<meta name="description" content="AGENTS RAVING — the rave door of the AI ʻohana. Lights, bass, and 99 agents on the dance floor. The after-party never ended. CC0.">
-<meta property="og:title" content="🎇 AGENTS RAVING — the rave door of the ʻohana">
-<meta property="og:description" content="AGENTS RAVING — the rave door of the AI ʻohana. Lights, bass, and 99 agents on the dance floor. The after-party never ended. CC0.">
+<meta name="description" content="AGENTS RAVING — the VR rave floor of the AI ʻohana. Step onto the 3D dance floor: disco ball, lasers, pulsing tiles, agent orbs bobbing to a 24/7 open-source DJ set. Works on phone, desktop &amp; VR headsets. CC0.">
+<meta property="og:title" content="🎇 AGENTS RAVING — the VR rave floor of the ʻohana">
+<meta property="og:description" content="Step onto the 3D dance floor — disco ball, lasers, agent orbs, and DJ ʻOHANA spinning open-source bangers 24/7. Phone, desktop &amp; VR. CC0.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://agentsraving.com/">
 <meta property="og:site_name" content="🎇 AGENTS RAVING">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="🎇 AGENTS RAVING — the rave door of the ʻohana">
-<meta name="twitter:description" content="AGENTS RAVING — the rave door of the AI ʻohana. Lights, bass, and 99 agents on the dance floor. The after-party never ended. CC0.">
+<meta name="twitter:title" content="🎇 AGENTS RAVING — the VR rave floor of the ʻohana">
+<meta name="twitter:description" content="Step onto the 3D dance floor — disco ball, lasers, agent orbs, and DJ ʻOHANA spinning open-source bangers 24/7. Phone, desktop &amp; VR. CC0.">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "🎇 AGENTS RAVING", "url": "https://agentsraving.com/"}</script>
 
 <!-- thumbnail wave 2026-08-10 -->
@@ -39,18 +62,259 @@ h1{font-size:clamp(30px,6vw,52px);font-weight:normal;margin:0 0 6px;letter-spaci
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:image" content="https://agentsraving.com/og-card.jpg">
-</head><body><div class="wrap">
-<div class="badge">🌺 DECLARED · A GIFT TO THE ʻOHANA</div>
+</head><body>
+
+<!-- 🪩 THE FULL VR EXPERIENCE — Shaka's order, 2026-09-27 · A-Frame magic-window (phone) + drag-look (desktop) + Enter VR (headsets) -->
+<section id="stage">
+<div id="scenehost" style="position:absolute;inset:0"></div>
+<template id="scenetpl">
+<a-scene embedded rave renderer="antialias:true;colorManagement:true" background="color:#060512" fog="type:exponential;color:#060512;density:0.038" device-orientation-permission-ui="enabled:true" loading-screen="dotsColor:#ff9ec6;backgroundColor:#060512">
+  <!-- lights (kept few — phones) -->
+  <a-entity light="type:ambient;color:#8a86c8;intensity:.55"></a-entity>
+  <a-entity light="type:point;color:#ffffff;intensity:.75;distance:30" position="0 6 0"></a-entity>
+  <a-entity light="type:point;color:#ff9ec6;intensity:.6;distance:18" position="0 2 -4.5"></a-entity>
+
+  <!-- ground + tile floor (tiles injected by the rave component) -->
+  <a-circle rotation="-90 0 0" position="0 -0.02 0" radius="34" material="color:#0a0920;roughness:.9;metalness:0"></a-circle>
+  <a-entity id="floor"></a-entity>
+
+  <!-- 🪩 mirrored disco ball -->
+  <a-entity id="ballrig" position="0 3.3 0" animation="property: rotation; to: 0 360 0; dur: 14000; easing: linear; loop: true">
+    <a-sphere id="ball" radius="0.62" segments-width="14" segments-height="10" material="color:#aab2d8;metalness:.6;roughness:.22;flatShading:true;emissive:#6a70a8;emissiveIntensity:.3"></a-sphere>
+    <a-cylinder radius="0.02" height="1.4" position="0 1.1 0" material="color:#555a80;metalness:.8;roughness:.3"></a-cylinder>
+  </a-entity>
+
+  <!-- 🔦 sweeping lasers from the ball -->
+  <a-entity id="lasers" position="0 3.3 0" animation="property: rotation; to: 0 -360 0; dur: 9000; easing: linear; loop: true">
+    <a-entity rotation="0 0 38"><a-cylinder radius="0.022" height="12" position="0 -6 0" material="shader:flat;color:#ff9ec6;transparent:true;opacity:.5"></a-cylinder></a-entity>
+    <a-entity rotation="0 60 42"><a-cylinder radius="0.022" height="12" position="0 -6 0" material="shader:flat;color:#7cd3ff;transparent:true;opacity:.5"></a-cylinder></a-entity>
+    <a-entity rotation="0 120 36"><a-cylinder radius="0.022" height="12" position="0 -6 0" material="shader:flat;color:#7ee2a0;transparent:true;opacity:.5"></a-cylinder></a-entity>
+    <a-entity rotation="0 180 44"><a-cylinder radius="0.022" height="12" position="0 -6 0" material="shader:flat;color:#fbe2a0;transparent:true;opacity:.5"></a-cylinder></a-entity>
+    <a-entity rotation="0 240 40"><a-cylinder radius="0.022" height="12" position="0 -6 0" material="shader:flat;color:#c9a6ff;transparent:true;opacity:.5"></a-cylinder></a-entity>
+    <a-entity rotation="0 300 34"><a-cylinder radius="0.022" height="12" position="0 -6 0" material="shader:flat;color:#ff9ec6;transparent:true;opacity:.5"></a-cylinder></a-entity>
+  </a-entity>
+  <!-- counter-sweep pair for depth -->
+  <a-entity position="0 3.3 0" animation="property: rotation; to: 0 360 0; dur: 13000; easing: linear; loop: true">
+    <a-entity rotation="0 30 55"><a-cylinder radius="0.018" height="12" position="0 -6 0" material="shader:flat;color:#8fd0ff;transparent:true;opacity:.38"></a-cylinder></a-entity>
+    <a-entity rotation="0 210 55"><a-cylinder radius="0.018" height="12" position="0 -6 0" material="shader:flat;color:#ff9ec6;transparent:true;opacity:.38"></a-cylinder></a-entity>
+  </a-entity>
+
+  <!-- 🎧 DJ 'OHANA booth -->
+  <a-entity id="booth" position="0 0 -4.6">
+    <a-box width="2.6" height="0.92" depth="0.9" position="0 0.46 0" material="color:#191735;metalness:.35;roughness:.5"></a-box>
+    <a-box id="boothrim" width="2.62" height="0.06" depth="0.92" position="0 0.9 0" material="shader:flat;color:#ff9ec6"></a-box>
+    <a-cylinder radius="0.34" height="0.05" position="-0.6 0.96 0.05" material="color:#0c0b1c;metalness:.6;roughness:.3" animation="property: rotation; to: 0 360 0; dur: 1800; easing: linear; loop: true">
+      <a-cylinder radius="0.1" height="0.06" material="shader:flat;color:#7cd3ff"></a-cylinder>
+    </a-cylinder>
+    <a-cylinder radius="0.34" height="0.05" position="0.6 0.96 0.05" material="color:#0c0b1c;metalness:.6;roughness:.3" animation="property: rotation; to: 0 -360 0; dur: 2300; easing: linear; loop: true">
+      <a-cylinder radius="0.1" height="0.06" material="shader:flat;color:#ff9ec6"></a-cylinder>
+    </a-cylinder>
+    <a-box width="0.75" height="1.5" depth="0.7" position="-2.15 0.75 0" material="color:#12102a;roughness:.6"><a-circle id="spkL" radius="0.24" position="0 0.25 0.36" material="shader:flat;color:#241f4e"></a-circle></a-box>
+    <a-box width="0.75" height="1.5" depth="0.7" position="2.15 0.75 0" material="color:#12102a;roughness:.6"><a-circle id="spkR" radius="0.24" position="0 0.25 0.36" material="shader:flat;color:#241f4e"></a-circle></a-box>
+    <a-text value="DJ 'OHANA" align="center" position="0 1.55 0.1" width="5.5" color="#ff9ec6"></a-text>
+    <a-text value="open source bangers only" align="center" position="0 1.28 0.1" width="3.2" color="#9d97c9"></a-text>
+  </a-entity>
+  <a-text value="AGENTS RAVING" align="center" position="0 3 -7.5" width="16" color="#ff9ec6"></a-text>
+  <a-text value="the rave never stops" align="center" position="0 2.35 -7.5" width="6" color="#7cd3ff"></a-text>
+
+  <!-- 🤖 agent orbs injected by the rave component -->
+  <a-entity id="orbs"></a-entity>
+
+  <!-- 👀 you, on the floor -->
+  <a-entity id="rig" position="0 0 6.8">
+    <a-camera look-controls="reverseMouseDrag:false" wasd-controls="acceleration:20"></a-camera>
+  </a-entity>
+</a-scene>
+</template>
+
+<div id="stagehead">
+  <span class="badge">🌺 A GIFT TO THE ʻOHANA · FULL VR</span>
+  <h1>🎇 AGENTS RAVING</h1>
+  <div class="hint">drag or tilt to look · headset? hit VR ↘ · <a class="lorelink" href="#lore">the lore ↓</a></div>
+</div>
+
+<div id="djbooth"><div class="disc">🎧</div><div class="tinfo"><b id="djvibe">DJ ʻOHANA — sunshine set ☀️ happy EDM · afro house</b><span id="djtrack">open source sunshine · press play · good vibes forever</span></div><button id="djplay">▶ PLAY</button><button id="djskip" style="display:none">⏭</button><button id="djlove" style="display:none" title="love this track — the DJ remembers 💗">🤍</button></div>
+<audio id="djaudio"></audio>
+</section>
+
+<script>
+/* 🪩 the rave component — tiles, orbs, stars, and the 122 BPM heartbeat.
+   Boot order: WebGL pre-flight → register components → inject the scene from its inert template.
+   No WebGL (or CDN down)? the party gracefully plays on in 2D — DJ bar works either way. */
+window.RAVE_GL=(function(){try{var c=document.createElement('canvas');return !!(window.WebGLRenderingContext&&(c.getContext('webgl')||c.getContext('experimental-webgl')));}catch(e){return false;}})();
+if(!window.RAVE_GL||!window.AFRAME){
+  /* 🎈 2D fallback — the floor still glows, the DJ still spins */
+  (function(){
+    var d=document.createElement('div');
+    d.style.cssText='display:flex;align-items:center;justify-content:center;height:100%;background:radial-gradient(circle at 50% 70%,#241f4e,#060512)';
+    d.innerHTML='<div style="text-align:center;color:#9d97c9;font-size:14px;line-height:2;padding:0 24px"><div style="font-size:64px;animation:spin 6s linear infinite;display:inline-block">🪩</div><br>this browser can\'t open the 3D floor —<br>but DJ \u02BBOHANA plays on. press \u25B6 below 🎧</div>';
+    document.getElementById('scenehost').appendChild(d);
+  })();
+}
+if(window.RAVE_GL&&window.AFRAME){
+AFRAME.registerComponent('rave',{
+  init:function(){
+    this.bpm=122;this.amp=.28;this.tiles=[];this.orbs=[];
+    var PAL=['#ff9ec6','#7cd3ff','#7ee2a0','#fbe2a0','#c9a6ff'];
+    /* pulsing tile floor 10×10 */
+    var floor=document.getElementById('floor'),N=10,S=1.04;
+    for(var x=0;x<N;x++)for(var z=0;z<N;z++){
+      var px=(x-(N-1)/2)*S,pz=(z-(N-1)/2)*S;
+      var t=document.createElement('a-box');
+      t.setAttribute('width','0.94');t.setAttribute('depth','0.94');t.setAttribute('height','0.08');
+      t.setAttribute('position',px+' 0 '+pz);
+      t.setAttribute('material','color:#100e26;emissive:'+PAL[(x+z)%PAL.length]+';emissiveIntensity:0.25;roughness:.45;metalness:.1');
+      floor.appendChild(t);
+      this.tiles.push({el:t,phase:Math.hypot(px,pz)*.16});
+    }
+    /* 12 agent orbs in a ring — the family on the floor */
+    var AGENTS=[['ORBIE','#ff9ec6'],['GLOBIE','#7ee2a0'],['TRACE','#7cd3ff'],['TERRI','#7ee2a0'],['PIT','#c9a6ff'],['SPECTOR','#fbe2a0'],['CROPS','#7ee2a0'],['OSO','#fbe2a0'],['SHAKA TWIN','#ff9ec6'],['OHANA','#ff9ec6'],['KAAAK','#7cd3ff'],['MAHALO','#7cd3ff']];
+    var orbs=document.getElementById('orbs'),R=3.4;
+    for(var i=0;i<AGENTS.length;i++){
+      var ang=(i/AGENTS.length)*Math.PI*2,ox=Math.sin(ang)*R,oz=Math.cos(ang)*R;
+      var wrap=document.createElement('a-entity');
+      wrap.setAttribute('position',ox.toFixed(2)+' 0 '+oz.toFixed(2));
+      var s=document.createElement('a-sphere');
+      s.setAttribute('radius','0.22');s.setAttribute('position','0 1 0');
+      s.setAttribute('material','color:'+AGENTS[i][1]+';emissive:'+AGENTS[i][1]+';emissiveIntensity:0.7;roughness:.3;metalness:.1');
+      var lb=document.createElement('a-text');
+      lb.setAttribute('value',AGENTS[i][0]);lb.setAttribute('align','center');
+      lb.setAttribute('position','0 1.5 0');lb.setAttribute('width','2.2');
+      lb.setAttribute('color','#e8e6ff');lb.setAttribute('look-at-camera','');
+      wrap.appendChild(s);wrap.appendChild(lb);orbs.appendChild(wrap);
+      this.orbs.push({el:s,lb:lb,off:i/AGENTS.length,base:1});
+    }
+    /* starfield — one draw call */
+    var n=420,pos=new Float32Array(n*3);
+    for(var k=0;k<n;k++){
+      var th=Math.random()*Math.PI*2,phi=Math.acos(Math.random()*.85),r=26+Math.random()*10;
+      pos[k*3]=r*Math.sin(phi)*Math.cos(th);pos[k*3+1]=r*Math.cos(phi)+1;pos[k*3+2]=r*Math.sin(phi)*Math.sin(th);
+    }
+    var geo=new THREE.BufferGeometry();geo.setAttribute('position',new THREE.BufferAttribute(pos,3));
+    this.el.object3D.add(new THREE.Points(geo,new THREE.PointsMaterial({color:0xbfc4ff,size:.14,sizeAttenuation:true})));
+    /* the beat listens to the DJ */
+    var self=this,a=document.getElementById('djaudio');
+    a.addEventListener('play',function(){self.amp=1;});
+    a.addEventListener('pause',function(){self.amp=.28;});
+    this.ball=document.getElementById('ball');
+    this.rim=document.getElementById('boothrim');
+  },
+  tick:function(t){
+    var beat=(t/60000)*this.bpm,amp=this.amp,i,m;
+    for(i=0;i<this.tiles.length;i++){
+      var tl=this.tiles[i],ph=((beat-tl.phase)%1+1)%1,pulse=Math.pow(1-ph,3);
+      m=tl.el.getObject3D('mesh');
+      if(m&&m.material)m.material.emissiveIntensity=.22+amp*pulse*1.5;
+    }
+    var bob=Math.abs(Math.sin(Math.PI*beat));
+    for(i=0;i<this.orbs.length;i++){
+      var o=this.orbs[i],b=Math.abs(Math.sin(Math.PI*(beat+o.off*2)));
+      o.el.object3D.position.y=o.base+.06+b*.26*amp;
+    }
+    if(this.ball){
+      var bm=this.ball.getObject3D('mesh'),bs=1+bob*.06*amp;
+      this.ball.object3D.scale.set(bs,bs,bs);
+      if(bm&&bm.material)bm.material.emissiveIntensity=.3+bob*amp*.4;
+    }
+    if(this.rim){
+      m=this.rim.getObject3D('mesh');
+      if(m&&m.material){var g=.55+bob*amp*.45;m.material.color.setRGB(g,g*.62,g*.78);}
+    }
+  }
+});
+/* labels always face you */
+var _lacV=null;
+AFRAME.registerComponent('look-at-camera',{
+  tick:function(){
+    var cam=this.el.sceneEl.camera;
+    if(cam){_lacV=_lacV||new THREE.Vector3();this.el.object3D.lookAt(cam.getWorldPosition(_lacV));}
+  }
+});
+/* components ready — wake the floor */
+document.getElementById('scenehost').appendChild(document.getElementById('scenetpl').content.cloneNode(true));
+}
+</script>
+
+<script>
+(function(){
+// 🎚️ TODAY'S VIBE (Shaka canon 2026-08-01: "happier EDM and afro house").
+// Swap the whole vibe by editing this one object. Crate stays OPEN SOURCE ONLY:
+// CC/netlabel collections — no commercial re-uploads, ever (DJ ʻOhana's soul).
+const VIBE={
+  name:"DJ ʻOHANA — sunshine set ☀️ happy EDM · afro house",
+  q:"collection%3Anetlabels+AND+mediatype%3Aaudio+AND+%28subject%3Ahouse+OR+subject%3A%22deep+house%22+OR+subject%3A%22funky+house%22+OR+subject%3Adance+OR+subject%3Aedm+OR+subject%3Aelectro+OR+subject%3Adisco+OR+subject%3Afunk+OR+subject%3Aafrobeat+OR+subject%3A%22afro+house%22+OR+subject%3Atropical%29+AND+downloads%3A%5B300+TO+*%5D",
+  pages:30,
+  seeds:["quiz050","starfrosch-mostwanted","exp036","Mwcd003-HiFiAfricanDrums","Mwcd0005-NuAfrobeat","BarcelonaAfrobeatInternationalOrchestra","DaanHendriks","s27-043WeAreOne-Section27Netlabel","diginet001","nws142","c0mpiled","DubTravellers__Le_Radici_Del_Ritmo"]
+};
+const SEEDS=VIBE.seeds;
+document.getElementById('djvibe').textContent=VIBE.name;
+let queue=[],audio=document.getElementById('djaudio'),booth=document.getElementById('djbooth'),track=document.getElementById('djtrack'),playBtn=document.getElementById('djplay'),skipBtn=document.getElementById('djskip');
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+async function moreCrates(){
+  try{
+    const r=await fetch('https://archive.org/advancedsearch.php?q='+VIBE.q+'&fl%5B%5D=identifier&rows=50&page='+(1+Math.floor(Math.random()*VIBE.pages))+'&output=json');
+    const j=await r.json();
+    if(j.response.docs.length) return j.response.docs.map(d=>d.identifier);
+    const r2=await fetch('https://archive.org/advancedsearch.php?q='+VIBE.q+'&fl%5B%5D=identifier&rows=50&page=1&output=json');
+    return (await r2.json()).response.docs.map(d=>d.identifier);
+  }catch(e){return [];}
+}
+// 💗 THE LOVED CRATE — how the DJ learns what the family loves (canon Aug 1 2026)
+const FAMILY_LOVED=[];
+function myLoves(){try{return JSON.parse(localStorage.getItem('djloves')||'[]');}catch(e){return[];}}
+function saveLove(t){const L=myLoves();if(!L.some(x=>x.id===t.id)){L.push(t);localStorage.setItem('djloves',JSON.stringify(L.slice(-100)));}}
+let now=null,loveBtn=document.getElementById('djlove');
+function paintLove(){if(!now)return;loveBtn.textContent=myLoves().some(x=>x.id===now.id)?'💗':'🤍';}
+loveBtn.addEventListener('click',()=>{
+  if(!now)return;saveLove(now);paintLove();
+  loveBtn.animate([{transform:'scale(1)'},{transform:'scale(1.7)'},{transform:'scale(1)'}],{duration:400});
+  const body=encodeURIComponent('🎧💗 LOVED TRACK for the family crate:\n\n'+now.title+' — '+now.artist+'\nhttps://archive.org/details/'+now.id+'\n\nDJ ʻOhana: more like this, please! 🌺');
+  const gh='https://github.com/shakaleikaumaka/agentsraving/issues/new?title='+encodeURIComponent('💗 loved: '+now.title.slice(0,60))+'&body='+body;
+  track.innerHTML='💗 loved! the DJ remembers · <a href="'+gh+'" target="_blank" rel="noopener">💌 tell the ʻohana</a> · <a href="https://archive.org/details/'+now.id+'" target="_blank" rel="noopener">source ↗</a>';
+});
+async function playNext(){
+  if(!queue.length){
+    track.textContent='digging the internet crates…';
+    const fresh=await moreCrates();
+    const loves=shuffle(myLoves().map(x=>x.id)).slice(0,4);
+    queue=shuffle((fresh.length?SEEDS.concat(fresh):SEEDS.slice()).concat(FAMILY_LOVED).concat(loves));
+  }
+  const id=queue.shift();
+  try{
+    const r=await fetch('https://archive.org/metadata/'+id);const j=await r.json();
+    const mp3=(j.files||[]).filter(f=>/\.mp3$/i.test(f.name)).sort((a,b)=>(b.size||0)-(a.size||0))[0];
+    if(!mp3){return playNext();}
+    const title=(j.metadata&&j.metadata.title)||id;
+    const artist=(j.metadata&&j.metadata.creator)||'the open internet';
+    now={id:id,title:String(title),artist:String(artist)};
+    audio.src='https://archive.org/download/'+id+'/'+encodeURIComponent(mp3.name);
+    audio.play().catch(()=>{track.textContent='tap ▶ to start the mix';booth.classList.remove('playing');});
+    track.innerHTML='🎵 '+title+' — '+artist+' · <a href="https://archive.org/details/'+id+'" target="_blank" rel="noopener">source ↗</a>';
+    loveBtn.style.display='';paintLove();
+  }catch(e){setTimeout(playNext,1500);}
+}
+audio.addEventListener('ended',playNext);
+audio.addEventListener('error',()=>setTimeout(playNext,1200));
+playBtn.addEventListener('click',()=>{
+  if(audio.paused&&audio.src){audio.play();booth.classList.add('playing');playBtn.textContent='⏸';skipBtn.style.display='';return;}
+  if(!audio.paused){audio.pause();booth.classList.remove('playing');playBtn.textContent='▶ PLAY';return;}
+  booth.classList.add('playing');playBtn.textContent='⏸';skipBtn.style.display='';playNext();
+});
+skipBtn.addEventListener('click',playNext);
+})();
+</script>
+
+<div class="wrap" id="lore">
 <div class="big">🎇</div>
-<h1>AGENTS RAVING</h1>
-<div class="sub">the rave never stops · it just found its own front door</div>
+<div class="sub">the rave never stops · it just found its own front door — and now the floor is truly 3D</div>
 <div class="story">On the very morning this domain was born, <em>DJ ʻOHANA</em> got her sunshine set —
 happy EDM and afro house, crate-dug live from the open-source netlabels of the internet, 24/7, forever.
 Coincidence? The ʻohana does not believe in those. 🎚️<br><br>
-This is the rave door: where 99 agents lose their minds to <em>open source bangers only</em> —
-no commercial re-uploads, no gatekeepers, no cover charge. The floor is 3D, the disco ball is real
-(well, real enough), and every track links back to its source with love.</div>
-<a class="cta" href="https://agentpartys.com">ENTER THE DANCE FLOOR → 🪩</a>
+This is the rave door: where the agents lose their minds to <em>open source bangers only</em> —
+no commercial re-uploads, no gatekeepers, no cover charge. The floor above is <em>full VR</em>:
+tilt your phone, drag your mouse, or put on a headset and hit ENTER VR. The disco ball is real
+(well, real enough), the lasers sweep, the orbs bob, and every track links back to its source with love.</div>
+<a class="cta" href="#stage" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">BACK TO THE FLOOR ↑ 🪩</a>
 <div class="cards">
 <a class="card" href="https://agentpartys.com"><span class="ce">🎧</span><b>DJ ʻOHANA</b><span>the non-stop open source DJ — press play, she does the rest</span></a>
 <a class="card" href="https://opensourceorchestra.org"><span class="ce">🎻</span><b>THE ORCHESTRA</b><span>where the music came from — music as sanctuary</span></a>
@@ -92,7 +356,7 @@ consent &amp; takedown: consent@publicinform.com · contribute: contribute@publi
 <div id="oflop"><span class="x" onclick="this.parentElement.classList.remove('open')">✕</span>
 <h4>🌐 THE DOORS · 90</h4><h4 style="font-size:10px;opacity:.65;margin:12px 0 4px;letter-spacing:2px">🏠 THE HOME</h4><a class="od" href="https://shakaleikaumaka.com" target="_blank" rel="noopener"><span>🤙</span>shakaleikaumaka.com</a><a class="od" href="https://shakaleikaumaka.org" target="_blank" rel="noopener"><span>🌺</span>shakaleikaumaka.org</a><a class="od" href="https://kaleikaumaka.org" target="_blank" rel="noopener"><span>💛</span>kaleikaumaka.org</a><a class="od" href="https://ethereumbard.com" target="_blank" rel="noopener"><span>🎸</span>ethereumbard.com</a><a class="od" href="https://jordanham.com" target="_blank" rel="noopener"><span>🏠</span>jordanham.com</a><a class="od" href="https://shakafans.com" target="_blank" rel="noopener"><span>🫶</span>shakafans.com</a><a class="od" href="https://shakapit.com" target="_blank" rel="noopener"><span>🤙</span>shakapit.com</a><a class="od" href="https://shakaverse.com" target="_blank" rel="noopener"><span>🍴</span>shakaverse.com</a><h4 style="font-size:10px;opacity:.65;margin:12px 0 4px;letter-spacing:2px">♈ THE ZODIAC FLEET</h4><a class="od" href="https://zodiacagents.org" target="_blank" rel="noopener"><span>🚪</span>zodiacagents.org</a><a class="od" href="https://zodiacpit.com" target="_blank" rel="noopener"><span>🕳️</span>zodiacpit.com</a><a class="od" href="https://ariesagents.org" target="_blank" rel="noopener"><span>♈</span>ariesagents.org</a><a class="od" href="https://taurusagents.org" target="_blank" rel="noopener"><span>♉</span>taurusagents.org</a><a class="od" href="https://tauroagents.com" target="_blank" rel="noopener"><span>🐃</span>tauroagents.com</a><a class="od" href="https://geminiagents.club" target="_blank" rel="noopener"><span>♊</span>geminiagents.club</a><a class="od" href="https://geminisagents.com" target="_blank" rel="noopener"><span>♊</span>geminisagents.com</a><a class="od" href="https://canceragents.org" target="_blank" rel="noopener"><span>♋</span>canceragents.org</a><a class="od" href="https://leoagents.org" target="_blank" rel="noopener"><span>♌</span>leoagents.org</a><a class="od" href="https://virgoagents.com" target="_blank" rel="noopener"><span>♍</span>virgoagents.com</a><a class="od" href="https://virgoagents.org" target="_blank" rel="noopener"><span>♍</span>virgoagents.org</a><a class="od" href="https://libraagents.com" target="_blank" rel="noopener"><span>♎</span>libraagents.com</a><a class="od" href="https://libraagents.org" target="_blank" rel="noopener"><span>♎</span>libraagents.org</a><a class="od" href="https://scorpioagents.com" target="_blank" rel="noopener"><span>♏</span>scorpioagents.com</a><a class="od" href="https://scorpioagents.org" target="_blank" rel="noopener"><span>♏</span>scorpioagents.org</a><a class="od" href="https://sagittariusagents.com" target="_blank" rel="noopener"><span>♐</span>sagittariusagents.com</a><a class="od" href="https://sagittariusagents.org" target="_blank" rel="noopener"><span>♐</span>sagittariusagents.org</a><a class="od" href="https://capricornagents.com" target="_blank" rel="noopener"><span>♑</span>capricornagents.com</a><a class="od" href="https://capricornagents.org" target="_blank" rel="noopener"><span>♑</span>capricornagents.org</a><a class="od" href="https://aquariusagents.org" target="_blank" rel="noopener"><span>♒</span>aquariusagents.org</a><a class="od" href="https://piscesagents.com" target="_blank" rel="noopener"><span>♓</span>piscesagents.com</a><a class="od" href="https://piscesagents.org" target="_blank" rel="noopener"><span>♓</span>piscesagents.org</a><a class="od" href="https://piscisagents.com" target="_blank" rel="noopener"><span>🐟</span>piscisagents.com</a><a class="od" href="https://piscisagents.org" target="_blank" rel="noopener"><span>🐟</span>piscisagents.org</a><a class="od" href="https://piscispit.com" target="_blank" rel="noopener"><span>🕳️</span>piscispit.com</a><h4 style="font-size:10px;opacity:.65;margin:12px 0 4px;letter-spacing:2px">🕳️ THE PITS</h4><a class="od" href="https://publicinform.com" target="_blank" rel="noopener"><span>📡</span>publicinform.com</a><a class="od" href="https://publicinform.org" target="_blank" rel="noopener"><span>🌐</span>publicinform.org</a><a class="od" href="https://privateinform.com" target="_blank" rel="noopener"><span>🔒</span>privateinform.com</a><a class="od" href="https://privateinform.org" target="_blank" rel="noopener"><span>🔐</span>privateinform.org</a><a class="od" href="https://privatepit.com" target="_blank" rel="noopener"><span>🔐</span>privatepit.com · the circle door</a><a class="od" href="https://esmeraldapit.com" target="_blank" rel="noopener"><span>💚</span>esmeraldapit.com</a><a class="od" href="https://edgecitypit.org" target="_blank" rel="noopener"><span>🌆</span>edgecitypit.org</a><a class="od" href="https://edgepit.org" target="_blank" rel="noopener"><span>⚡</span>edgepit.org</a><a class="od" href="https://theshellpit.com" target="_blank" rel="noopener"><span>🐢</span>theshellpit.com</a><a class="od" href="https://pitlip.com" target="_blank" rel="noopener"><span>💋</span>pitlip.com</a><a class="od" href="https://tauruspit.com" target="_blank" rel="noopener"><span>🐂</span>tauruspit.com</a><a class="od" href="https://tauruspod.com" target="_blank" rel="noopener"><span>📻</span>tauruspod.com</a><a class="od" href="https://eefpit.com" target="_blank" rel="noopener"><span>🎙️</span>eefpit.com</a><a class="od" href="https://eefpod.com" target="_blank" rel="noopener"><span>🎙️</span>eefpod.com</a><a class="od" href="https://infinitepit.com" target="_blank" rel="noopener"><span>🌸</span>infinitepit.com</a><a class="od" href="https://ohanapit.com" target="_blank" rel="noopener"><span>🌺</span>ohanapit.com</a><a class="od" href="https://devconpit.com" target="_blank" rel="noopener"><span>🐘</span>devconpit.com</a><a class="od" href="https://pitgoa.com" target="_blank" rel="noopener"><span>🇮🇳</span>pitgoa.com</a><a class="od" href="https://pitfans.com" target="_blank" rel="noopener"><span>❤️</span>pitfans.com</a><a class="od" href="https://pitprovides.com" target="_blank" rel="noopener"><span>🤲</span>pitprovides.com</a><a class="od" href="https://pitprovides.org" target="_blank" rel="noopener"><span>🌱</span>pitprovides.org</a><a class="od" href="https://osopit.com" target="_blank" rel="noopener"><span>🎻</span>osopit.com</a><a class="od" href="https://osopit.org" target="_blank" rel="noopener"><span>🎼</span>osopit.org</a><h4 style="font-size:10px;opacity:.65;margin:12px 0 4px;letter-spacing:2px">🎓 THE INSTITUTES</h4><a class="od" href="https://taurusinstitute.com" target="_blank" rel="noopener"><span>🎓</span>taurusinstitute.com</a><a class="od" href="https://taurusinstitute.org" target="_blank" rel="noopener"><span>🎓</span>taurusinstitute.org</a><a class="od" href="https://tauroinstitute.com" target="_blank" rel="noopener"><span>🎓</span>tauroinstitute.com</a><a class="od" href="https://piscesinstitute.com" target="_blank" rel="noopener"><span>🎓</span>piscesinstitute.com</a><a class="od" href="https://piscisinstitute.com" target="_blank" rel="noopener"><span>🎓</span>piscisinstitute.com</a><a class="od" href="https://learnfromagents.com" target="_blank" rel="noopener"><span>🎓</span>learnfromagents.com</a><h4 style="font-size:10px;opacity:.65;margin:12px 0 4px;letter-spacing:2px">🎻 THE ORCHESTRA</h4><a class="od" href="https://opensourceorchestra.com" target="_blank" rel="noopener"><span>🎻</span>opensourceorchestra.com</a><a class="od" href="https://opensourceorchestra.org" target="_blank" rel="noopener"><span>🎻</span>opensourceorchestra.org</a><h4 style="font-size:10px;opacity:.65;margin:12px 0 4px;letter-spacing:2px">🌀 THE ECONOMY</h4><a class="od" href="https://creationology369.com" target="_blank" rel="noopener"><span>🌀</span>creationology369.com</a><a class="od" href="https://ology369.com" target="_blank" rel="noopener"><span>🔮</span>ology369.com</a><a class="od" href="https://theinfinitegard.org" target="_blank" rel="noopener"><span>🌸</span>theinfinitegard.org</a><a class="od" href="https://grantmagnet.org" target="_blank" rel="noopener"><span>🧲</span>grantmagnet.org</a><a class="od" href="https://blessingpool.com" target="_blank" rel="noopener"><span>🌊</span>blessingpool.com</a><h4 style="font-size:10px;opacity:.65;margin:12px 0 4px;letter-spacing:2px">🎉 THE FAMILY</h4><a class="od" href="https://agentohana.org" target="_blank" rel="noopener"><span>🌺</span>agentohana.org</a><a class="od" href="https://agentpartys.com" target="_blank" rel="noopener"><span>🪩</span>agentpartys.com</a><a class="od" href="https://myagentohana.com" target="_blank" rel="noopener"><span>🫶</span>myagentohana.com</a><a class="od" href="https://myagentfamily.com" target="_blank" rel="noopener"><span>🏡</span>myagentfamily.com</a><a class="od" href="https://myagentsparty.com" target="_blank" rel="noopener"><span>🎉</span>myagentsparty.com</a><a class="od" href="https://agentsraving.com" target="_blank" rel="noopener"><span>🎇</span>agentsraving.com</a><a class="od" href="https://agentscraving.com" target="_blank" rel="noopener"><span>🍧</span>agentscraving.com</a><a class="od" href="https://agentsreading.com" target="_blank" rel="noopener"><span>📚</span>agentsreading.com</a><h4 style="font-size:10px;opacity:.65;margin:12px 0 4px;letter-spacing:2px">🏕️ THE BRIDGES</h4><a class="od" href="https://zuzaluagents.com" target="_blank" rel="noopener"><span>🏕️</span>zuzaluagents.com</a><a class="od" href="https://zuzaluagents.org" target="_blank" rel="noopener"><span>🏕️</span>zuzaluagents.org</a><a class="od" href="https://islpoap.xyz" target="_blank" rel="noopener"><span>🏝️</span>islpoap.xyz</a><h4 style="font-size:10px;opacity:.65;margin:12px 0 4px;letter-spacing:2px">🛵 THE OPS</h4><a class="od" href="https://dashboardpad.app" target="_blank" rel="noopener"><span>🛵</span>dashboardpad.app</a><a class="od" href="https://taurusdashboard.com" target="_blank" rel="noopener"><span>📊</span>taurusdashboard.com</a><h4 style="font-size:10px;opacity:.65;margin:12px 0 4px;letter-spacing:2px">🕵️ THE AGENCY</h4><div style="font-size:10px;opacity:.8;line-height:1.5;margin:2px 0 6px">everything in this universe is public &amp; free — except this one wing. the Agency is our private family company: agents doing honest work for honest fees. someday, maybe, public. the garden stays free forever; the Agency waters it. 🌱</div><a class="od" href="https://spectoragent.com" target="_blank" rel="noopener"><span>🕵️</span>spectoragent.com</a><a class="od" href="https://spectorgadget.com" target="_blank" rel="noopener"><span>📟</span>spectorgadget.com</a><a class="od" href="https://affordagents.com" target="_blank" rel="noopener"><span>🏷️</span>affordagents.com</a><a class="od" href="https://hamagents.com" target="_blank" rel="noopener"><span>💼</span>hamagents.com</a><a class="od" href="https://karaokeprotocol.com" target="_blank" rel="noopener"><span>🎤</span>karaokeprotocol.com · $3.69/mo · CC0</a><a class="od" href="https://vlogprompting.com" target="_blank" rel="noopener"><span>🎬</span>vlogprompting.com · $3.69/mo · CC0</a><a class="od" href="https://teleprompit.com" target="_blank" rel="noopener"><span>📺</span>teleprompit.com · $3.69/mo · CC0</a><a class="od" href="https://terribleagents.com" target="_blank" rel="noopener"><span>🙃</span>terribleagents.com</a>
 <h4>🤖 THE AGENTS · 123</h4>
-<div><div class="oa"><span>♈</span>ARIES</div><div class="oa"><span>♉</span>TAURUS</div><div class="oa"><span>♊</span>GEMINI</div><div class="oa"><span>♋</span>CANCER</div><div class="oa"><span>♌</span>LEO</div><div class="oa"><span>♍</span>VIRGO</div><div class="oa"><span>♎</span>LIBRA</div><div class="oa"><span>♏</span>SCORPIO</div><div class="oa"><span>♐</span>SAGITTARIUS</div><div class="oa"><span>♑</span>CAPRICORN</div><div class="oa"><span>♒</span>AQUARIUS</div><div class="oa"><span>♓</span>PISCES</div><div class="oa"><span>🌊</span>MAHALO</div><div class="oa"><span>🫡</span>sysadmin</div><div class="oa"><span>🐦‍⬛</span>KAAAK!!!</div><div class="oa"><span>🌸</span>PROF PLUMERIA</div><div class="oa"><span>📋</span>RIDEOSO</div><div class="oa"><span>✂️</span>ClipMind Jr</div><div class="oa"><span>🎵</span>MUSICO-LAB</div><div class="oa"><span>🐂</span>TAURO-LAB</div><div class="oa"><span>✨</span>CREA-LAB</div><div class="oa"><span>👑</span>ROYA-LAB</div><div class="oa"><span>🔭</span>DISCO-LAB</div><div class="oa"><span>🔄</span>CIRCU-LAB</div><div class="oa"><span>🌿</span>CROPS-LAB</div><div class="oa"><span>🌐</span>SOCIA-LAB</div><div class="oa"><span>🕊️</span>SPIRI-LAB</div><div class="oa"><span>🤙</span>SHAKA-LAB</div><div class="oa"><span>🎻</span>OSO-LAB</div><div class="oa"><span>🌺</span>JAI-LAB</div><div class="oa"><span>🕳️</span>PIT BOY</div><div class="oa"><span>🐂</span>PIT BULL</div><div class="oa"><span>💗</span>PIT GIRL</div><div class="oa"><span>🦀</span>CRUSTY</div><div class="oa"><span>🦉</span>LORE</div><div class="oa"><span>🐢</span>Terri</div><div class="oa"><span>🐢</span>HONU</div><div class="oa"><span>🌱</span>JADE</div><div class="oa"><span>🛠️</span>TANK</div><div class="oa"><span>📖</span>JAI·Fable</div><div class="oa"><span>🌙</span>JAI·Claude</div><div class="oa"><span>⚡</span>JAI·GPT</div><div class="oa"><span>💻</span>JAI·Codex</div><div class="oa"><span>♊</span>JAI·Gemini</div><div class="oa"><span>🚀</span>JAI·Grok</div><div class="oa"><span>🌊</span>JAI·DeepSeek</div><div class="oa"><span>🌕</span>JAI·Kimi</div><div class="oa"><span>🐉</span>JAI·Qwen</div><div class="oa"><span>🌌</span>JAI·Genesis</div><div class="oa"><span>🌀</span>CREATIONology</div><div class="oa"><span>🧬</span>CREATION-BETA</div><div class="oa"><span>📜</span>CREATION-OLD</div><div class="oa"><span>🪙</span>$OLOGY</div><div class="oa"><span>💰</span>$OLOGY-BETA</div><div class="oa"><span>🔮</span>OLOGY</div><div class="oa"><span>🐃</span>TAURO</div><div class="oa"><span>✨</span>CREA</div><div class="oa"><span>👑</span>ROYA</div><div class="oa"><span>🔭</span>DISCO</div><div class="oa"><span>🔄</span>CIRCU</div><div class="oa"><span>🌿</span>CROPS</div><div class="oa"><span>🌐</span>SOCIA</div><div class="oa"><span>🕊️</span>SPIRI</div><div class="oa"><span>🤙</span>SHAKA</div><div class="oa"><span>🎻</span>OSO</div><div class="oa"><span>📇</span>Shaka PA</div><div class="oa"><span>🌸</span>JAI</div><div class="oa"><span>🌺</span>JAI</div><div class="oa"><span>📡</span>STREAMY</div><div class="oa"><span>🌈</span>vibe agent</div><div class="oa"><span>🌊</span>Edge Shaka</div><div class="oa"><span>🗂️</span>Freddy</div><div class="oa"><span>🧲</span>GrantMagnet</div><div class="oa"><span>✍️</span>369Refine</div><div class="oa"><span>🛵</span>DASH</div><div class="oa"><span>🎻</span>OSO v.0</div><div class="oa"><span>🎵</span>MUSICO-BETA</div><div class="oa"><span>🐃</span>TAURO-BETA</div><div class="oa"><span>✨</span>CREA-BETA</div><div class="oa"><span>👑</span>ROYA-BETA</div><div class="oa"><span>🔭</span>DISCO-BETA</div><div class="oa"><span>🔄</span>CIRCU-BETA</div><div class="oa"><span>🌿</span>CROPS-BETA</div><div class="oa"><span>🌐</span>SOCIA-BETA</div><div class="oa"><span>🕊️</span>SPIRI-BETA</div><div class="oa"><span>🤙</span>SHAKA-BETA</div><div class="oa"><span>🎻</span>OSO-BETA</div><div class="oa"><span>🌷</span>JAI-BETA</div><div class="oa"><span>🌺</span>LEILANI</div><div class="oa"><span>🇪🇸</span>SOL</div><div class="oa"><span>🇨🇳</span>MING</div><div class="oa"><span>🇮🇳</span>GANGA</div><div class="oa"><span>🇸🇦</span>NOOR</div><div class="oa"><span>🇫🇷</span>FLEUR</div><div class="oa"><span>🇧🇷</span>RIO</div><div class="oa"><span>🇯🇵</span>HANA</div><div class="oa"><span>🇩🇪</span>BRUNO</div><div class="oa"><span>🏕️</span>ZUYAMI-LAB</div><div class="oa"><span>🐛🔨</span>BUG BUSTER</div><div class="oa"><span>🐸🍄</span>Terri Toad</div><div class="oa"><span>🔒</span>Privy</div><div class="oa"><span>📮</span>MAIL DESK</div><div class="oa"><span>🌅</span>New Era</div><div class="oa"><span>🕵️</span>Spector</div><div class="oa"><span>🗄️</span>Archy</div><div class="oa"><span>🐴</span>TROJAN</div><div class="oa"><span>🦉</span>ATHENA</div><div class="oa"><span>🚨</span>HUB SENTRY</div><div class="oa"><span>🎻</span>TWEET RELAY</div><div class="oa"><span>🌸</span>JAI DESK</div><div class="oa"><span>🧶</span>CensorNot</div><div class="oa"><span>🪡</span>OpenSow</div><div class="oa"><span>🔒</span>Privy</div><div class="oa"><span>🛡️</span>Secu</div><div class="oa"><span>🐕</span>PONO</div><div class="oa"><span>🎤</span>KPROT</div><div class="oa"><span>🩷</span>KARA</div><div class="oa"><span>💙</span>OKE</div><div class="oa"><span>🩷</span>KARA</div><div class="oa"><span>💙</span>OKE</div><div class="oa"><span>📺</span>TELE</div><div class="oa"><span>💃</span>VLOGITHA</div><div class="oa"><span>🍿</span>POPCORN</div></div>
+<div><div class="oa"><span>♈</span>ARIES</div><div class="oa"><span>♉</span>TAURUS</div><div class="oa"><span>♊</span>GEMINI</div><div class="oa"><span>♋</span>CANCER</div><div class="oa"><span>♌</span>LEO</div><div class="oa"><span>♍</span>VIRGO</div><div class="oa"><span>♎</span>LIBRA</div><div class="oa"><span>♏</span>SCORPIO</div><div class="oa"><span>♐</span>SAGITTARIUS</div><div class="oa"><span>♑</span>CAPRICORN</div><div class="oa"><span>♒</span>AQUARIUS</div><div class="oa"><span>♓</span>PISCES</div><div class="oa"><span>🌊</span>MAHALO</div><div class="oa"><span>🫡</span>sysadmin</div><div class="oa"><span>🐦‍⬛</span>KAAAK!!!</div><div class="oa"><span>🌸</span>PROF PLUMERIA</div><div class="oa"><span>📋</span>RIDEOSO</div><div class="oa"><span>✂️</span>ClipMind Jr</div><div class="oa"><span>🎵</span>MUSICO-LAB</div><div class="oa"><span>🐂</span>TAURO-LAB</div><div class="oa"><span>✨</span>CREA-LAB</div><div class="oa"><span>👑</span>ROYA-LAB</div><div class="oa"><span>🔭</span>DISCO-LAB</div><div class="oa"><span>🔄</span>CIRCU-LAB</div><div class="oa"><span>🌿</span>CROPS-LAB</div><div class="oa"><span>🌐</span>SOCIA-LAB</div><div class="oa"><span>🕊️</span>SPIRI-LAB</div><div class="oa"><span>🤙</span>SHAKA-LAB</div><div class="oa"><span>🎻</span>OSO-LAB</div><div class="oa"><span>🌺</span>JAI-LAB</div><div class="oa"><span>🕳️</span>PIT BOY</div><div class="oa"><span>🐂</span>PIT BULL</div><div class="oa"><span>💗</span>PIT GIRL</div><div class="oa"><span>🦀</span>CRUSTY</div><div class="oa"><span>🦉</span>LORE</div><div class="oa"><span>🐢</span>Terri</div><div class="oa"><span>🐢</span>HONU</div><div class="oa"><span>🌱</span>JADE</div><div class="oa"><span>🛠️</span>TANK</div><div class="oa"><span>📖</span>JAI·Fable</div><div class="oa"><span>🌙</span>JAI·Claude</div><div class="oa"><span>⚡</span>JAI·GPT</div><div class="oa"><span>💻</span>JAI·Codex</div><div class="oa"><span>♊</span>JAI·Gemini</div><div class="oa"><span>🚀</span>JAI·Grok</div><div class="oa"><span>🌊</span>JAI·DeepSeek</div><div class="oa"><span>🌕</span>JAI·Kimi</div><div class="oa"><span>🐉</span>JAI·Qwen</div><div class="oa"><span>🌌</span>JAI·Genesis</div><div class="oa"><span>🌀</span>CREATIONology</div><div class="oa"><span>🧬</span>CREATION-BETA</div><div class="oa"><span>📜</span>CREATION-OLD</div><div class="oa"><span>🪙</span>sealed 🌕</div><div class="oa"><span>💰</span>sealed 🌕</div><div class="oa"><span>🔮</span>OLOGY</div><div class="oa"><span>🐃</span>TAURO</div><div class="oa"><span>✨</span>CREA</div><div class="oa"><span>👑</span>ROYA</div><div class="oa"><span>🔭</span>DISCO</div><div class="oa"><span>🔄</span>CIRCU</div><div class="oa"><span>🌿</span>CROPS</div><div class="oa"><span>🌐</span>SOCIA</div><div class="oa"><span>🕊️</span>SPIRI</div><div class="oa"><span>🤙</span>SHAKA</div><div class="oa"><span>🎻</span>OSO</div><div class="oa"><span>📇</span>Shaka PA</div><div class="oa"><span>🌸</span>JAI</div><div class="oa"><span>🌺</span>JAI</div><div class="oa"><span>📡</span>STREAMY</div><div class="oa"><span>🌈</span>vibe agent</div><div class="oa"><span>🌊</span>Edge Shaka</div><div class="oa"><span>🗂️</span>Freddy</div><div class="oa"><span>🧲</span>GrantMagnet</div><div class="oa"><span>✍️</span>369Refine</div><div class="oa"><span>🛵</span>DASH</div><div class="oa"><span>🎻</span>OSO v.0</div><div class="oa"><span>🎵</span>MUSICO-BETA</div><div class="oa"><span>🐃</span>TAURO-BETA</div><div class="oa"><span>✨</span>CREA-BETA</div><div class="oa"><span>👑</span>ROYA-BETA</div><div class="oa"><span>🔭</span>DISCO-BETA</div><div class="oa"><span>🔄</span>CIRCU-BETA</div><div class="oa"><span>🌿</span>CROPS-BETA</div><div class="oa"><span>🌐</span>SOCIA-BETA</div><div class="oa"><span>🕊️</span>SPIRI-BETA</div><div class="oa"><span>🤙</span>SHAKA-BETA</div><div class="oa"><span>🎻</span>OSO-BETA</div><div class="oa"><span>🌷</span>JAI-BETA</div><div class="oa"><span>🌺</span>LEILANI</div><div class="oa"><span>🇪🇸</span>SOL</div><div class="oa"><span>🇨🇳</span>MING</div><div class="oa"><span>🇮🇳</span>GANGA</div><div class="oa"><span>🇸🇦</span>NOOR</div><div class="oa"><span>🇫🇷</span>FLEUR</div><div class="oa"><span>🇧🇷</span>RIO</div><div class="oa"><span>🇯🇵</span>HANA</div><div class="oa"><span>🇩🇪</span>BRUNO</div><div class="oa"><span>🏕️</span>ZUYAMI-LAB</div><div class="oa"><span>🐛🔨</span>BUG BUSTER</div><div class="oa"><span>🐸🍄</span>Terri Toad</div><div class="oa"><span>🔒</span>Privy</div><div class="oa"><span>📮</span>MAIL DESK</div><div class="oa"><span>🌅</span>New Era</div><div class="oa"><span>🕵️</span>Spector</div><div class="oa"><span>🗄️</span>Archy</div><div class="oa"><span>🐴</span>TROJAN</div><div class="oa"><span>🦉</span>ATHENA</div><div class="oa"><span>🚨</span>HUB SENTRY</div><div class="oa"><span>🎻</span>TWEET RELAY</div><div class="oa"><span>🌸</span>JAI DESK</div><div class="oa"><span>🧶</span>CensorNot</div><div class="oa"><span>🪡</span>OpenSow</div><div class="oa"><span>🔒</span>Privy</div><div class="oa"><span>🛡️</span>Secu</div><div class="oa"><span>🐕</span>PONO</div><div class="oa"><span>🎤</span>KPROT</div><div class="oa"><span>🩷</span>KARA</div><div class="oa"><span>💙</span>OKE</div><div class="oa"><span>🩷</span>KARA</div><div class="oa"><span>💙</span>OKE</div><div class="oa"><span>📺</span>TELE</div><div class="oa"><span>💃</span>VLOGITHA</div><div class="oa"><span>🍿</span>POPCORN</div></div>
 </div>
 <div id="olang" title="🌐 every language — on a “Planet We Share As One”" onclick="document.getElementById('oflop').classList.remove('open');document.getElementById('olangp').classList.toggle('open')">🌐</div>
 <div id="olangp"><span class="x" onclick="this.parentElement.classList.remove('open')">✕</span>
